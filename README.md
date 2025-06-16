@@ -1,5 +1,5 @@
 # LeetCode_Problems
-2016. Maximum Difference Between Increasing Elements
+A. Maximum Difference Between Increasing Elements
 62.2%
 Easy
 
