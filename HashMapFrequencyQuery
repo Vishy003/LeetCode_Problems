@@ -1,0 +1,34 @@
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Step 1: Read input array
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+
+        System.out.println("Enter " + n + " elements:");
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        // Step 2: Precompute frequencies using HashMap
+        HashMap<Integer, Integer> freqMap = new HashMap<>();
+        for (int num : arr) {
+            freqMap.put(num, freqMap.getOrDefault(num, 0) + 1);
+        }
+
+        // Step 3: Read number of queries
+        int q = sc.nextInt();
+        System.out.println("Enter " + q + " queries:");
+
+        for (int i = 0; i < q; i++) {
+            int number = sc.nextInt();
+            System.out.println(freqMap.getOrDefault(number, 0));
+        }
+
+        sc.close();
+    }
+}
