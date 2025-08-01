@@ -1,0 +1,20 @@
+class Solution {
+    public boolean isSubsequenceSumK(int[] arr, int k) {
+        return helper(0, 0, arr, k);
+    }
+
+    private boolean helper(int i, int sum, int[] arr, int k) {
+        if (i == arr.length)
+            return sum == k;
+
+        // Include current element
+        if (helper(i + 1, sum + arr[i], arr, k))
+            return true;
+
+        // Exclude current element
+        if (helper(i + 1, sum, arr, k))
+            return true;
+
+        return false;
+    }
+}
