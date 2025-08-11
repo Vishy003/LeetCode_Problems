@@ -1,0 +1,53 @@
+// 85. Maximal Rectangle
+// Hard
+
+// Given a rows x cols binary matrix filled with 0's and 1's, find the largest rectangle containing only 1's and return its area.
+
+// Example 1:
+
+// Input: matrix = [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]
+// Output: 6
+// Explanation: The maximal rectangle is shown in the above picture.
+// Example 2:
+
+// Input: matrix = [["0"]]
+// Output: 0
+// Example 3:
+
+// Input: matrix = [["1"]]
+// Output: 1
+ 
+// Constraints:
+
+// rows == matrix.length
+// cols == matrix[i].length
+// 1 <= row, cols <= 200
+// matrix[i][j] is '0' or '1'.
+
+class Solution {
+    public int maximalRectangle(char[][] M) {
+        if (M.length == 0) return 0;
+        int m = M.length, n = M[0].length, res = 0;
+        int[] h = new int[n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++)
+                h[j] = M[i][j] == '1' ? h[j] + 1 : 0;
+            res = Math.max(res, largestRect(h));
+        }
+        return res;
+    }
+    int largestRect(int[] h) {
+        Stack<Integer> st = new Stack<>();
+        int max = 0;
+        for (int i = 0; i <= h.length; i++) {
+            int cur = (i == h.length ? 0 : h[i]);
+            while (!st.isEmpty() && cur < h[st.peek()]) {
+                int ht = h[st.pop()];
+                int w = st.isEmpty() ? i : i - st.peek() - 1;
+                max = Math.max(max, ht * w);
+            }
+            st.push(i);
+        }
+        return max;
+    }
+}
